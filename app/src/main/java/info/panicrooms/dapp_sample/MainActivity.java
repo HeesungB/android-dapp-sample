@@ -9,11 +9,17 @@ import android.util.Log;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.core.methods.response.Web3ClientVersion;
+import org.web3j.protocol.exceptions.TransactionException;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Transfer;
+import org.web3j.utils.Convert;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.concurrent.ExecutionException;
 
@@ -53,11 +59,21 @@ public class MainActivity extends AppCompatActivity {
                 String clientVersion = web3ClientVersion.getWeb3ClientVersion();
 
                 Credentials credentials = Credentials.create("0x770a2e0421b189c656197de429aaf913a2dfd1bac293fa904258bd59e8fb03b6");
-                Log.d("zz",credentials.getAddress());
+
+                //send eth
+                TransactionReceipt transactionReceipt = Transfer.sendFunds(
+                        web3, credentials, "0x8283227A7b2a8e7679D75cAa07A00A2b798D9e12",
+                        BigDecimal.valueOf(0.5), Convert.Unit.ETHER).sendAsync().get();
+
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (TransactionException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
