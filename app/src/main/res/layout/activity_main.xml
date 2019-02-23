@@ -4,17 +4,20 @@
         <variable name="mainLayout" type="info.panicrooms.dapp_sample.MainActivity"/>
     </data>
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/swipeLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mailList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:padding="10dp">
 
-    </LinearLayout>
+        </android.support.v7.widget.RecyclerView>
 
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </layout>
